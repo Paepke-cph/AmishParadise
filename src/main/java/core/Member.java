@@ -5,19 +5,21 @@ import java.time.temporal.ChronoUnit;
 
 public class Member {
     private int id;
-    private String username, firstName, lastName;
+    private String username, firstName, lastName, imagePath;
     private LocalDate birthdate;
     private Gender gender;
-    private String imagePath;
     
-    public Member(String username, String firstName,String lastName, LocalDate birthdate, Gender gender) {
+    public Member(String username, String firstName,String lastName,
+            LocalDate birthdate, Gender gender) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthdate = birthdate;
         this.gender = gender;
     }
-    public Member(int id, String username, String firstName,String lastName, LocalDate birthdate, Gender gender) {
+    
+    public Member(int id, String username, String firstName,String lastName,
+            LocalDate birthdate, Gender gender) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
@@ -26,9 +28,7 @@ public class Member {
         this.gender = gender;
     }
     
-    public int getAge() {
-        return (int)ChronoUnit.YEARS.between(birthdate, LocalDate.now());
-    }
+    public int getAge() { return (int)ChronoUnit.YEARS.between(birthdate, LocalDate.now()); }
     
     public void setID(int id) { this.id = id; }
     public int getID() { return id; }

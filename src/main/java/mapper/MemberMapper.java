@@ -17,19 +17,23 @@ public class MemberMapper {
         ArrayList<Member> members = new ArrayList<>();
         String sql = "SELECT * FROM members";
         try {
-            ArrayList<HashMap<String,String>> sqlResult = connector.selectQuery(connector.getConnection().prepareStatement(sql));
+            ArrayList<HashMap<String,String>> sqlResult = 
+                    connector.selectQuery(connector.getConnection().prepareStatement(sql));
             for (HashMap<String, String> hashMap : sqlResult) {
                 int id = Integer.parseInt(hashMap.get("member_id"));
                 String firstName = hashMap.get("member_firstname");
                 String lastName = hashMap.get("member_lastname");
                 String username = hashMap.get("member_username");
-                LocalDate birthdate = (java.sql.Date.valueOf(hashMap.get("member_birthdate"))).toLocalDate();
+                LocalDate birthdate = (java.sql.Date
+                        .valueOf(hashMap.get("member_birthdate")))
+                        .toLocalDate();
                 Gender gender = Gender.from(hashMap.get("member_gender"));
-                String picture = hashMap.get("member_imagepath");
+                String picture = hashMap.get("member_picture_path");
                 if(picture == null || picture.equals("")) {
                     picture = "images/missingProfilePic.jpg";
                 }
-                Member member = new Member(id,username,firstName,lastName,birthdate,gender);
+                Member member = 
+                        new Member(id,username,firstName,lastName,birthdate,gender);
                 member.setProfilePicture(picture);
                 members.add(member);
             }
