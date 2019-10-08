@@ -4,13 +4,17 @@ import core.Gender;
 import core.Member;
 import storage.DBStorage;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import logic.Encryption;
 import mapper.MemberMapper;
 
 /**
@@ -47,12 +51,16 @@ public class FrontController extends HttpServlet {
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
         else if (cmd.equals("login")) {            
-            if (storage.checkLogin(request.getParameter("username"), request.getParameter("password"))) {
-                Member member = memberMapper.getMember(request.getParameter("username"));
-                session.setAttribute("user", member);
-                request.getRequestDispatcher("jsp/UserHome.jsp").forward(request, response);
-            }
-            else {
+            try {
+                if (storage.checkLogin(request.getParameter("username"), Encryption.encryptThisString(request.getParameter("password")))) {
+                    Member member = memberMapper.getMember(request.getParameter("username"));
+                    session.setAttribute("user", member);
+                    request.getRequestDispatcher("jsp/UserHome.jsp").forward(request, response);
+                }
+                else {
+                    request.getRequestDispatcher("jsp/index.jsp").forward(request, response);
+                }
+            } catch (NoSuchAlgorithmException ex) {
                 request.getRequestDispatcher("jsp/index.jsp").forward(request, response);
             }
         }
@@ -78,13 +86,17 @@ public class FrontController extends HttpServlet {
             String psw = request.getParameter("password");
             LocalDate birthdate = LocalDate.parse(request.getParameter("birthdate"));
             Member member = new Member(username, fistName, lastName, birthdate, gender);
-            int id = storage.createMember(member,psw);
-            if (id > 0) {
-                member.setID(id);
-                session.setAttribute("user", member);
-                request.getRequestDispatcher("jsp/UserHome.jsp").forward(request, response);
-            }
-            else {
+            int id;
+            try {
+                id = storage.createMember(member,Encryption.encryptThisString(psw));
+                if (id > 0) {
+                    member.setID(id);
+                    session.setAttribute("user", member);
+                    request.getRequestDispatcher("jsp/UserHome.jsp").forward(request, response);
+                } else {
+                    request.getRequestDispatcher("jsp/RegisterMember.jsp").forward(request, response);
+                }
+            } catch (NoSuchAlgorithmException ex) {
                 request.getRequestDispatcher("jsp/RegisterMember.jsp").forward(request, response);
             }
         }
