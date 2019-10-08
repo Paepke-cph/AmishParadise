@@ -37,24 +37,29 @@
                     </select>
                 </div>
             </div>
-
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Username</label>
-                <div class="uk-inline">
-                    <span class="uk-form-icon" uk-icon="icon: user"></span>
-                    <input class="uk-input" type="text" name="username">
-                </div>
+                <label class="uk-form-label" for="form-horizontal-text">Birthdate</label>
+                <input type="date" name="birthdate">
             </div>
-            <div- class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Password</label>
-                <div class="uk-inline">
-                    <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
-                    <input class="uk-input" type="password" name="password">
-                </div>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-stacked-text">Username</label>
+            <div class="uk-inline">
+                <span class="uk-form-icon" uk-icon="icon: user"></span>
+                <input class="uk-input" type="text" name="username">
+            </div>
+        </div>
+        <div- class="uk-margin">
+            <label class="uk-form-label" for="form-stacked-text">Password</label>
+            <div class="uk-inline">
+                <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+                <input class="uk-input" type="password" name="password">
+            </div>
             </div>
             <button class="uk-button uk-button-default" name="cmd" value="createMember">Register</button>
-        </form>
-        <script src="js/jquery.js"></script>
-        <script src="js/uikit.min.js"></script>
-    </body>
+    </form>
+    <script src="js/jquery.js"></script>
+    <script src="js/uikit.min.js"></script>
+</body>
 </html>

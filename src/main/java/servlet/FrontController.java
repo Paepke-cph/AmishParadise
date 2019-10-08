@@ -75,8 +75,8 @@ public class FrontController extends HttpServlet {
             String lastName = request.getParameter("lastName");
             Gender gender = Gender.from(request.getParameter("gender"));
             String username = request.getParameter("username");
-            String birthdate = request.getParameter("birthdate");
-            Member member = new Member(username, fistName, lastName, LocalDate.now(), gender);
+            LocalDate birthdate = LocalDate.parse(request.getParameter("birthdate"));
+            Member member = new Member(username, fistName, lastName, birthdate, gender);
             int id = storage.createMember(member);
             if (id > 0) {
                 member.setID(id);

@@ -30,7 +30,7 @@
                 <div class="uk-card-body">
                     <h3 class="uk-card-title">${sessionScope.user.getUsername()}</h3>
                     <p>${sessionScope.user.getFirstName()} ${sessionScope.user.getLastName()}</p>
-                    <p>${sessionScope.user.getGender()}</p>
+                    <p>${sessionScope.user.getGender().getText()}</p>
                     <p>Age: ${sessionScope.user.getAge()}</p>
                 </div>
                 <c:if test="${sessionScope.user.getBio() != null || sessionScope.user.getBio().length() == 0}">

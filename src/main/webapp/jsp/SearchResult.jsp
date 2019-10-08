@@ -29,7 +29,7 @@
                         <div class="uk-card-body">
                             <h3 class="uk-card-title">${member.getUsername()}</h3>
                             <p>${member.getFirstName()} ${member.getLastName()}</p>
-                            <p>${member.getGender()}</p>
+                            <p>${member.getGender().getText()}</p>
                             <p>Age: ${member.getAge()}</p>
                         </div>
                         <c:if test="${member.getBio() != null || member.getBio().length() == 0}">
