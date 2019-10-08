@@ -72,7 +72,7 @@ public class Member {
     public String getProfilePicture() { return imagePath; }
     
     public void setBio(String bio) {
-        if(bio.length() > MAX_BIO_LENGTH) 
+        if(bio != null && bio.length() > MAX_BIO_LENGTH) 
             throw new IllegalArgumentException("Bio is too long");
         else
             this.bio = bio;

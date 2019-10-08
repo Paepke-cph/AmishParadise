@@ -37,25 +37,40 @@ public class FrontController extends HttpServlet {
         String cmd = request.getParameter("cmd");
         if (cmd.equals("home")) {
             request.getRequestDispatcher("index.jsp").forward(request, response);
-        } else if (cmd.equals("testSearch")) {
+        }
+        else if (cmd.equals("testSearch")) {
             request.setAttribute("allMembers", memberMapper.getAllMembers());
             request.getRequestDispatcher("jsp/SearchResult.jsp").forward(request, response);
-        } else if (cmd.equals("logout")) {
+        }
+        else if (cmd.equals("logout")) {
             session.setAttribute("user", null);
             request.getRequestDispatcher("index.jsp").forward(request, response);
-        } else if (cmd.equals("login")) {
+        }
+        else if (cmd.equals("login")) {
             Member member = memberMapper.getMember(request.getParameter("username"));
             if (member != null) {
                 session.setAttribute("user", member);
                 request.getRequestDispatcher("jsp/UserHome.jsp").forward(request, response);
-            } else {
+            }
+            else {
                 request.getRequestDispatcher("jsp/index.jsp").forward(request, response);
             }
-        } else if (cmd.equals("userHome")) {
+        }
+        else if(cmd.equals("updateMember")) {
+            String bio = request.getParameter("bio");
+            Member member = (Member)session.getAttribute("user");
+            member.setBio(bio);
+            storage.updateMember(member);
+            session.setAttribute("user", member);
             request.getRequestDispatcher("jsp/UserHome.jsp").forward(request, response);
-        } else if (cmd.equals("register")) {
+        }
+        else if (cmd.equals("userHome")) {
+            request.getRequestDispatcher("jsp/UserHome.jsp").forward(request, response);
+        }
+        else if (cmd.equals("register")) {
             request.getRequestDispatcher("jsp/RegisterMember.jsp").forward(request, response);
-        } else if (cmd.equals("createMember")) {
+        }
+        else if (cmd.equals("createMember")) {
             String fistName = request.getParameter("firstName");
             String lastName = request.getParameter("lastName");
             Gender gender = Gender.from(request.getParameter("gender"));
@@ -67,7 +82,8 @@ public class FrontController extends HttpServlet {
                 member.setID(id);
                 session.setAttribute("user", member);
                 request.getRequestDispatcher("jsp/UserHome.jsp").forward(request, response);
-            } else {
+            }
+            else {
                 request.getRequestDispatcher("jsp/RegisterMember.jsp").forward(request, response);
             }
         }

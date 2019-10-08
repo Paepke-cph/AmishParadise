@@ -37,6 +37,7 @@
                     </select>
                 </div>
             </div>
+
             <div class="uk-margin">
                 <label class="uk-form-label" for="form-stacked-text">Username</label>
                 <div class="uk-inline">
@@ -44,7 +45,7 @@
                     <input class="uk-input" type="text" name="username">
                 </div>
             </div>
-            <div class="uk-margin">
+            <div- class="uk-margin">
                 <label class="uk-form-label" for="form-stacked-text">Password</label>
                 <div class="uk-inline">
                     <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
