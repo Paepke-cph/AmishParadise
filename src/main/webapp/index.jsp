@@ -14,13 +14,10 @@
         <link rel="stylesheet" href="css/uikit.min.css"/>
     </head>
     <body>
-        <h1>Armish Paradise</h1>
-        <form action="FrontController">
-            <button class="uk-button uk-button-default">Search Members</button>
-            <input type="hidden" name="cmd" value="testSearch">
-        </form>
+        <%@include file="jsp/NavBar.jsp"%>
 
         <script src="js/jquery.js"></script>
         <script src="js/uikit.min.js"></script>
+        <script src="js/uikit-icons.min.js"></script>
     </body>
 </html>

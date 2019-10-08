@@ -15,6 +15,7 @@
         <title>Members</title>
     </head>
     <body>
+        <%@include file="NavBar.jsp"%>
         <c:if test="${requestScope.allMembers.isEmpty()}">
             <h1>No members found</h1>
         </c:if>
@@ -31,9 +32,11 @@
                             <p>${member.getGender()}</p>
                             <p>Age: ${member.getAge()}</p>
                         </div>
-                        <div class="uk-card-footer">
-                            <a href="#" class="uk-button uk-button-text">Read more</a>
-                        </div>
+                        <c:if test="${member.getBio() != null || member.getBio().length() == 0}">
+                            <div class="uk-card-footer">
+                                <p>${member.getBio()}</p>
+                            </div>
+                        </c:if>
                     </div>
                 </div>
             </c:forEach>

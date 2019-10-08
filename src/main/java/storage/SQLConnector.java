@@ -34,7 +34,7 @@ public class SQLConnector implements AutoCloseable {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
             statement = connection.prepareStatement(URL);
         } else {
-            try(FileInputStream fileInput = new FileInputStream("C:\\Users\\Benjamin\\Documents\\NetBeansProjects\\ArmishParadise\\db.properties")) {
+            try(FileInputStream fileInput = new FileInputStream("C:\\Users\\Benjamin\\Documents\\NetBeansProjects\\AmishParadise\\db.properties")) {
                 Class.forName("com.mysql.jdbc.Driver");
                 Properties properties = new Properties();
                 properties.load(fileInput);
