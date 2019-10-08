@@ -23,7 +23,7 @@ public class DBStorage {
         return connector;
     }
 
-    public int createMember(Member member) {
+    public int createMember(Member member, String psw) {
         int id = -1;
         String sql = "insert into members(member_username,member_firstName,member_lastName,member_birthdate,member_gender) values (?,?,?,?,?)";
         PreparedStatement query;
@@ -38,11 +38,19 @@ public class DBStorage {
 
             sql = "SELECT LAST_INSERT_ID() as member_id";
             query = connector.getConnection().prepareStatement(sql);
-            return Integer.parseInt(connector.selectQuery(query).get(0).get("member_id"));
+            id =  Integer.parseInt(connector.selectQuery(query).get(0).get("member_id"));
+            if(id > 0) {
+                sql = "insert into login (login_username,login_password) values (?,?)";
+                query = connector.getConnection().prepareStatement(sql);
+                query.setString(1, member.getUsername());
+                query.setString(2, psw);
+                connector.insertUpdateDeleteQuery(query);
+            }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
             return id;
         }
+        return id;
     }
 
     public void updateMember(Member member) {
@@ -57,5 +65,21 @@ public class DBStorage {
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
+    }
+    
+    public boolean checkLogin(String username, String psw) {
+        boolean res = false;
+        String sql = "select * from login where login_username = ? and login_password = ?";
+        PreparedStatement query;
+        try {
+            query = connector.getConnection().prepareStatement(sql);
+            query.setString(1, username);
+            query.setString(2, psw);
+            if (connector.selectQuery(query).size() == 1)
+                res = true;
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return res;
     }
 }

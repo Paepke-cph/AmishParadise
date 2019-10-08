@@ -43,6 +43,7 @@ public class SQLConnector implements AutoCloseable {
                 String fileUSER = properties.getProperty("user");
                 String filePASSWORD = properties.getProperty("password");
                 connection = DriverManager.getConnection(fileURL, fileUSER, filePASSWORD);
+                statement = connection.prepareStatement(URL);
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(SQLConnector.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {

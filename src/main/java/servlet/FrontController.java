@@ -46,9 +46,9 @@ public class FrontController extends HttpServlet {
             session.setAttribute("user", null);
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
-        else if (cmd.equals("login")) {
-            Member member = memberMapper.getMember(request.getParameter("username"));
-            if (member != null) {
+        else if (cmd.equals("login")) {            
+            if (storage.checkLogin(request.getParameter("username"), request.getParameter("password"))) {
+                Member member = memberMapper.getMember(request.getParameter("username"));
                 session.setAttribute("user", member);
                 request.getRequestDispatcher("jsp/UserHome.jsp").forward(request, response);
             }
@@ -75,9 +75,10 @@ public class FrontController extends HttpServlet {
             String lastName = request.getParameter("lastName");
             Gender gender = Gender.from(request.getParameter("gender"));
             String username = request.getParameter("username");
+            String psw = request.getParameter("password");
             LocalDate birthdate = LocalDate.parse(request.getParameter("birthdate"));
             Member member = new Member(username, fistName, lastName, birthdate, gender);
-            int id = storage.createMember(member);
+            int id = storage.createMember(member,psw);
             if (id > 0) {
                 member.setID(id);
                 session.setAttribute("user", member);
