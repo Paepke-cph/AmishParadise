@@ -35,26 +35,7 @@ public class Encryption {
         
         return hexString.toString();
     }
-    
-//    //Driver code
-//    public static void main(String[] args) {
-//        try{
-//            System.out.println("HashCode generated with SHA-256 for:");
-//            String s1 = "First string or password?";
-//            System.out.println("\n" + s1 + " : " + toHexString(getSHA(s1)));
-//            
-//            
-//            
-//            System.out.println("HashCode generated with SHA-512 for:");
-//            String s2 = "First string or password?";
-//            System.out.println("\n" + s2 + " : " + encryptThisString(s2));
-//            
-//        } catch (NoSuchAlgorithmException e){
-//            //For Specefying wrong message digest algorithms
-//            System.out.println("Exception thrown for incorrect algotithm: " + e);
-//        }
-//    }
-    
+        
     //One class version for the 512
     public static String encryptThisString(String input) throws NoSuchAlgorithmException {
         //getInstance() method is called with algorithm SHA-512
